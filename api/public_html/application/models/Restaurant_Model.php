@@ -17,11 +17,20 @@ class Restaurant_Model extends CI_Model {
 
 	public function add_restaurant($data) {
 		$sql = 'INSERT INTO Restaurant VALUES(?, ?, ?, ?, ?, ?, ? ,?)';
-		$this->db->trans_begin();
 		$this->db->query($sql, $data);
-		$result = $this->db->trans_status();
-		$this->db->trans_commit();
-		return $result;
+		return (bool)($this->db->affected_rows() > 0);
+	}
+
+	public function update_restaurant($data) {
+		$sql = 'UPDATE Restaurant SET RES_NAME=?, RES_REVIEW=?, RES_LOCALTION=?, OPENNING_TIME=?, CLOSING_TIME=?, RES_PHONE=?, RES_SCORE=? WHERE RES_ID=?';
+		$this->db->query($sql, $data);
+		return (bool)($this->db->affected_rows() > 0);
+	}
+
+	public function delete_restaurant($id) {
+		$sql = 'DELETE FROM Restaurant WHERE RES_ID=?';
+		$result = $this->db->query($sql, array('RES_ID' => $id));
+		return (bool)($this->db->affected_rows() > 0);
 	}
 }
 ?>
