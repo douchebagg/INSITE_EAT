@@ -77,11 +77,15 @@ class Restaurant extends REST_Controller {
     public function index_delete($id) {
         $result = $this->Restaurant_Model->delete_restaurant($id);
         if($result) {
-            $result = $this->Restaurant_Model->list_restaurant($id);
-            $this->response(array('restaurant' => $result), 200);
+            $this->response(array('restaurant' => 'Restaurant is deleted successfully.'), 204);
         } else {
             $this->response(array('restaurant' => 'Delete Restaurant failed.'), 204);
         }
+    }
+
+    public function count_get() {
+        $result = $this->Restaurant_Model->list_all_restaurants();
+        $this->response(array('size' => count($result)), 200);
     }
 }
 ?>

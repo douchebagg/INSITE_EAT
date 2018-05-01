@@ -7,7 +7,7 @@
 			$scope.refresh = function() {
 				$http.get('<?= base_url("restaurant") ?>')
 			        .then(function(response) {
-			            $scope.restaurant = JSON.parse(response.data.restaurant);
+			            $scope.restaurant = response.data.restaurant;
 			        });
 			}
 
@@ -40,7 +40,7 @@
 			$scope.isedit = function($id) {
 				$http.get('<?= base_url("restaurant/") ?>' + $id)
 			        .then(function(response) {
-			            $scope.edit_data = JSON.parse(response.data.restaurant);
+			            $scope.edit_data = response.data.restaurant;
 			            $scope.edit = {};
 			            $scope.edit.RES_ID = $scope.edit_data[0].RES_ID;
 			            $scope.edit.RES_NAME = $scope.edit_data[0].RES_NAME;

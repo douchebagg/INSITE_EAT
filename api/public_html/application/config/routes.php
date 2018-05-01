@@ -55,9 +55,10 @@ $route['translate_uri_dashes'] = TRUE;
 
 /*
 | -------------------------------------------------------------------------
-| Sample REST API Routes
+| Restaurant Routes
 | -------------------------------------------------------------------------
 */
+$route['restaurant/count']['get'] = 'restaurant/count';
 $route['restaurant']['get'] = 'restaurant/index';
 $route['restaurant/([a-zA-Z0-9_-]+)']['get'] = 'restaurant/find/$1';
 $route['restaurant']['post'] = 'restaurant/index';
