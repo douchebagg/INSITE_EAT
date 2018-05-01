@@ -29,18 +29,20 @@ class Restaurant extends REST_Controller {
     }
 
     public function index_post() {
+        $postdata = file_get_contents("php://input");
+        $request = json_decode($postdata);
     	$data = array(
-    		'RES_ID' => $this->post('id'),
-    		'RES_NAME' => $this->post('name'),
-    		'RES_REVIEW' => $this->post('review'),
-    		'RES_LOCALTION' => $this->post('location'),
-    		'OPENNING_TIME' => $this->post('openning'),
-    		'CLOSING_TIME' => $this->post('closing'),
-    		'RES_PHONE' => $this->post('phone'),
-    		'RES_SCORE' => $this->post('score')
+    		'RES_ID' => $request->RES_ID,
+    		'RES_NAME' => $request->RES_NAME,
+    		'RES_REVIEW' => $request->RES_REVIEW,
+    		'RES_LOCALTION' => $request->RES_LOCALTION,
+    		'OPENNING_TIME' => $request->OPENNING_TIME,
+    		'CLOSING_TIME' => $request->CLOSING_TIME,
+    		'RES_PHONE' => $request->RES_PHONE,
+    		'RES_SCORE' => $request->RES_SCORE
     	);
-		$result = $this->Restaurant_Model->add_restaurant($data);
 
+		$result = $this->Restaurant_Model->add_restaurant($data);
 		if($result) {
             $result = $this->Restaurant_Model->list_restaurant($data['RES_ID']);
 			$this->response(array('restaurant' => $result), 201);
@@ -50,18 +52,20 @@ class Restaurant extends REST_Controller {
     }
 
     public function index_put($id) {
+        $putdata = file_get_contents("php://input");
+        $request = json_decode($putdata);
         $data = array(
-            'RES_ID' => $id,
-            'RES_NAME' => $this->post('name'),
-            'RES_REVIEW' => $this->post('review'),
-            'RES_LOCALTION' => $this->post('location'),
-            'OPENNING_TIME' => $this->post('openning'),
-            'CLOSING_TIME' => $this->post('closing'),
-            'RES_PHONE' => $this->post('phone'),
-            'RES_SCORE' => $this->post('score')
+            'RES_NAME' => $request->RES_NAME,
+            'RES_REVIEW' => $request->RES_REVIEW,
+            'RES_LOCALTION' => $request->RES_LOCALTION,
+            'OPENNING_TIME' => $request->OPENNING_TIME,
+            'CLOSING_TIME' => $request->CLOSING_TIME,
+            'RES_PHONE' => $request->RES_PHONE,
+            'RES_SCORE' => $request->RES_SCORE,
+            'RES_ID' => $id
         );
-        $result = $this->Restaurant_Model->update_restaurant($data);
 
+        $result = $this->Restaurant_Model->update_restaurant($data);
         if($result) {
             $result = $this->Restaurant_Model->list_restaurant($id);
             $this->response(array('restaurant' => $result), 200);
@@ -72,7 +76,6 @@ class Restaurant extends REST_Controller {
 
     public function index_delete($id) {
         $result = $this->Restaurant_Model->delete_restaurant($id);
-
         if($result) {
             $result = $this->Restaurant_Model->list_restaurant($id);
             $this->response(array('restaurant' => $result), 200);

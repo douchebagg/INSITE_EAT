@@ -59,7 +59,7 @@ $route['translate_uri_dashes'] = TRUE;
 | -------------------------------------------------------------------------
 */
 $route['restaurant']['get'] = 'restaurant/index';
-$route['restaurant/(:num)']['get'] = 'restaurant/find/$1';
+$route['restaurant/([a-zA-Z0-9_-]+)']['get'] = 'restaurant/find/$1';
 $route['restaurant']['post'] = 'restaurant/index';
-$route['restaurant/(:num)']['put'] = 'restaurant/index/$1';
-$route['restaurant/(:num)']['delete'] = 'restaurant/index/$1';
+$route['restaurant/([a-zA-Z0-9_-]+)']['put'] = 'restaurant/index/$1';
+$route['restaurant/([a-zA-Z0-9_-]+)']['delete'] = 'restaurant/index/$1';

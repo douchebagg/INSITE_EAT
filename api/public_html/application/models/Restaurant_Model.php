@@ -16,7 +16,7 @@ class Restaurant_Model extends CI_Model {
 	}
 
 	public function add_restaurant($data) {
-		$sql = 'INSERT INTO Restaurant VALUES(?, ?, ?, ?, ?, ?, ? ,?)';
+		$sql = 'INSERT INTO Restaurant VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
 		$this->db->query($sql, $data);
 		return (bool)($this->db->affected_rows() > 0);
 	}
