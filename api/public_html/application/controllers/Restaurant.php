@@ -15,7 +15,7 @@ class Restaurant extends REST_Controller {
     	if(!empty($result)) {
 			$this->response(array('restaurant' => $result), 200);
     	} else {
-    		$this->response(array('restaurant' => array('No data in Restaurant api.')), 204);
+    		$this->response(array('restaurant' => 'No data in Restaurant api.'), 200);
     	}
     }
 
@@ -24,8 +24,13 @@ class Restaurant extends REST_Controller {
     	if(!empty($result)) {
 			$this->response(array('restaurant' => $result), 200);
     	} else {
-    		$this->response(array('restaurant' => 'No data in Restaurant api.'), 204);
+    		$this->response(array('restaurant' => 'No data in Restaurant api.'), 200);
     	}
+    }
+
+    public function count_get() {
+        $result = $this->Restaurant_Model->list_all_restaurants();
+        $this->response(array('size' => count($result)), 200);
     }
 
     public function index_post() {
@@ -39,7 +44,8 @@ class Restaurant extends REST_Controller {
     		'OPENNING_TIME' => $request->OPENNING_TIME,
     		'CLOSING_TIME' => $request->CLOSING_TIME,
     		'RES_PHONE' => $request->RES_PHONE,
-    		'RES_SCORE' => $request->RES_SCORE
+    		'RES_SCORE' => $request->RES_SCORE,
+            'UPDATE_TIME' => date("Y-m-d H:i:s")
     	);
 
 		$result = $this->Restaurant_Model->add_restaurant($data);
@@ -47,7 +53,7 @@ class Restaurant extends REST_Controller {
             $result = $this->Restaurant_Model->list_restaurant($data['RES_ID']);
 			$this->response(array('restaurant' => $result), 201);
 		} else {
-			$this->response(array('restaurant' => 'Add Restaurant failed.'), 204);
+			$this->response(array('restaurant' => 'Add Restaurant failed.'), 200);
 		}
     }
 
@@ -62,6 +68,7 @@ class Restaurant extends REST_Controller {
             'CLOSING_TIME' => $request->CLOSING_TIME,
             'RES_PHONE' => $request->RES_PHONE,
             'RES_SCORE' => $request->RES_SCORE,
+            'UPDATE_TIME' => date("Y-m-d H:i:s"),
             'RES_ID' => $id
         );
 
@@ -70,22 +77,17 @@ class Restaurant extends REST_Controller {
             $result = $this->Restaurant_Model->list_restaurant($id);
             $this->response(array('restaurant' => $result), 200);
         } else {
-            $this->response(array('restaurant' => 'Update Restaurant failed.'), 204);
+            $this->response(array('restaurant' => 'Update Restaurant failed.'), 200);
         }
     }
 
     public function index_delete($id) {
         $result = $this->Restaurant_Model->delete_restaurant($id);
         if($result) {
-            $this->response(array('restaurant' => 'Restaurant is deleted successfully.'), 204);
+            $this->response(array('restaurant' => 'Restaurant is deleted successfully.'), 200);
         } else {
-            $this->response(array('restaurant' => 'Delete Restaurant failed.'), 204);
+            $this->response(array('restaurant' => 'Delete Restaurant failed.'), 200);
         }
-    }
-
-    public function count_get() {
-        $result = $this->Restaurant_Model->list_all_restaurants();
-        $this->response(array('size' => count($result)), 200);
     }
 }
 ?>

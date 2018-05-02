@@ -10,19 +10,19 @@ class Restaurant_Model extends CI_Model {
     }
 
 	public function list_all_restaurants() {
-		$sql = 'SELECT * FROM Restaurant ORDER BY RES_ID, RES_SCORE';
+		$sql = 'SELECT * FROM Restaurant ORDER BY RES_ID';
 		$result = $this->db->query($sql);
 		return $result->result_array();
 	}
 
 	public function add_restaurant($data) {
-		$sql = 'INSERT INTO Restaurant VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
+		$sql = 'INSERT INTO Restaurant VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$this->db->query($sql, $data);
 		return (bool)($this->db->affected_rows() > 0);
 	}
 
 	public function update_restaurant($data) {
-		$sql = 'UPDATE Restaurant SET RES_NAME=?, RES_REVIEW=?, RES_LOCALTION=?, OPENNING_TIME=?, CLOSING_TIME=?, RES_PHONE=?, RES_SCORE=? WHERE RES_ID=?';
+		$sql = 'UPDATE Restaurant SET RES_NAME=?, RES_REVIEW=?, RES_LOCALTION=?, OPENNING_TIME=?, CLOSING_TIME=?, RES_PHONE=?, RES_SCORE=?, UPDATE_TIME=? WHERE RES_ID=?';
 		$this->db->query($sql, $data);
 		return (bool)($this->db->affected_rows() > 0);
 	}

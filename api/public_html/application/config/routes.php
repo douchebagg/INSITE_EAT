@@ -58,9 +58,22 @@ $route['translate_uri_dashes'] = TRUE;
 | Restaurant Routes
 | -------------------------------------------------------------------------
 */
-$route['restaurant/count']['get'] = 'restaurant/count';
 $route['restaurant']['get'] = 'restaurant/index';
-$route['restaurant/([a-zA-Z0-9_-]+)']['get'] = 'restaurant/find/$1';
+$route['restaurant/([A-Z0-9]+)']['get'] = 'restaurant/find/$1';
+$route['restaurant/count']['get'] = 'restaurant/count';
 $route['restaurant']['post'] = 'restaurant/index';
-$route['restaurant/([a-zA-Z0-9_-]+)']['put'] = 'restaurant/index/$1';
-$route['restaurant/([a-zA-Z0-9_-]+)']['delete'] = 'restaurant/index/$1';
+$route['restaurant/([A-Z0-9]+)']['put'] = 'restaurant/index/$1';
+$route['restaurant/([A-Z0-9]+)']['delete'] = 'restaurant/index/$1';
+/*
+| -------------------------------------------------------------------------
+| Food Routes
+| -------------------------------------------------------------------------
+*/
+$route['restaurant/food']['get'] = 'food/all';
+$route['restaurant/([A-Z0-9]+)/food']['get'] = 'food/index/$1';
+$route['restaurant/([A-Z0-9]+)/food/([A-Z0-9]+)']['get'] = 'food/find/$1/$2';
+$route['restaurant/food/count']['get'] = 'food/count_all/';
+$route['restaurant/([A-Z0-9]+)/food/count']['get'] = 'food/count/$1';
+$route['restaurant/([A-Z0-9]+)/food']['post'] = 'food/index/$1';
+$route['restaurant/([A-Z0-9]+)/food/([A-Z0-9]+)']['put'] = 'food/index/$1/$2';
+$route['restaurant/([A-Z0-9]+)/food/([A-Z0-9]+)']['delete'] = 'food/index/$1/$2';
