@@ -19,10 +19,6 @@
         if (response.status === 'connected') {
           // Logged into your app and Facebook.
           testAPI();
-        } else {
-          // The person is not logged into your app or we are unable to tell.
-          document.getElementById('status').innerHTML = 'Please log ' +
-            'into this app.';
         }
       }
 
@@ -70,7 +66,7 @@
         js.src = "https://connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-
+      
       // Here we run a very simple test of the Graph API after login is
       // successful.  See statusChangeCallback() for when this call is made.
       function testAPI() {
@@ -119,12 +115,9 @@
             <div class="card">
                 <div class="button-container">
                     <span class="g-signin2" data-width="360" data-height="60" data-longtitle="true" data-onsuccess="onSignIn"></span>
-                </div>
+                </div><br>
                 <div class="button-container">
-                    <button class="f-signin">
-                        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                        </fb:login-button>
-                    </button>
+                    <div class="fb-login-button" data-max-rows="1" data-width="360" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" data-scope="public_profile, email"></div>
                 </div>
                 <div id="status">
                 </div>
@@ -152,6 +145,13 @@
                 var id_token = googleUser.getAuthResponse().id_token;
                 console.log("ID Token: " + id_token);
             };
+
+            function signOut() {
+              var auth2 = gapi.auth2.getAuthInstance();
+              auth2.signOut().then(function () {
+                console.log('User signed out.');
+              });
+            }
         </script>
         
     </div>
