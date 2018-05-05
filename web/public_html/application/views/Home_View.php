@@ -26,12 +26,27 @@
     </script>
 </head>
 <body ng-controller="myctrl">
-    <div class="container" style="padding-top: 120px; padding-bottom: 100px;">
+    <div class="container" style="padding-top: 10px; padding-bottom: 100px;">
         <div class="row">
-            <div class="col-md-3" ng-repeat="x in restaurant">
+            <div class="col-md-12">
+                <div class="polaroid">
+                    <table>
+                        <tr>
+                            <td><?= $this->session->userdata('user_data')['token'] ?></td>
+                            <td><?= $this->session->userdata('user_data')['name'] ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">fdsfsda</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="restaurant !== 'No data in Restaurant api.'">
+            <div class="col-md-3" ng-repeat="x in restaurant | filter: search">
                 <div class="polaroid">
                     <a href="<?= base_url('restaurant') ?>/{{x.RES_ID}}" style="text-decoration: none">
-                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.RES_IMAGES}}" style="width:100%" ng-hide="x.RES_IMAGES === NULL">
+                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.RES_IMAGE}}" style="width:100%" ng-hide="x.RES_IMAGES === NULL">
                         <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.RES_IMAGES !== NULL">
                         <div class="content">
                             <div>{{x.RES_NAME}}</div>
@@ -44,6 +59,15 @@
                             <div>post by: {{x.POST_BY}}</div>
                         </div>
                     </a>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="restaurant === 'No data in Restaurant api.'">
+            <div class="col-md-12">
+                <div class="polaroid">
+                    <div class="content">
+                        <div class="title">No information in database.</div>
+                    </div>
                 </div>
             </div>
         </div>

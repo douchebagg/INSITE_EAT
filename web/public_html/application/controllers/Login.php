@@ -16,14 +16,15 @@ class Login extends CI_Controller {
 				);
 				$this->session->set_userdata('user_data', $session);
 			} else {
-				// LOGIN ธรรมดา
+				$this->login();
+				redirect('home');
 			}
 		} else {
-			//if($this->session->userdata('user_data') === NULL) {
+			if($this->session->userdata('user_data') === NULL) {
 				$this->load->view('Login_View');
-			//} else {
-			//	redirect(base_url('home'));
-			//}
+			} else {
+				redirect(base_url('home'));
+			}
 		}
 	}
 
@@ -46,14 +47,12 @@ class Login extends CI_Controller {
 			//validation succeeds
 			if ($this->input->post('login') == "Login") {
 				//check if username and password is correct
-				$usr_result = $this->Login_model->get_user($username, $password);
+				$usr_result = $this->Login_Model->get_user($username, $password);
 				if($usr_result) {
 					foreach($usr_result as $row) {
 						$sessArray = array(
-						'userName' => $row->userName,
-						'status' => $row->status,
-						'stuID' => $row->stuID,
-						'is_authenticated' => TRUE,
+						'token' => $row->ID,
+						'name' => $row->DISPLAY_NAME,
 						);
 						$this->session->set_userdata($sessArray);
 					}

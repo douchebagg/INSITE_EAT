@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         function signin(token, name) {
-            $.post('<?= base_url('login') ?>', {
+            $.post('<?= base_url() ?>', {
                 token: token,
                 name: name
             });
@@ -28,7 +28,7 @@
                 profile.getName()
             );
             googleSignOut();
-            window.location.href = "<?= base_url('home') ?>";
+            window.location.href = "<?= base_url() ?>";
             // console.log("ID: " + profile.getId());
             // console.log('Full Name: ' + profile.getName());
             // console.log('Given Name: ' + profile.getGivenName());
@@ -81,7 +81,7 @@
             <div class="card"></div>
             <div class="card">
                 <h1 class="title">Login</h1>
-                <form action="<?= base_url('home') ?>">
+                <form action="<?= base_url('login') ?>" method="POST">
                     <div class="input-container">
                         <input type="text" required="required" />
                         <label for="Username">Username</label>

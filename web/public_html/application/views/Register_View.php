@@ -13,14 +13,14 @@
                 <div class="card"></div>
                 <div class="card">
                     <h1 class="title">Register</h1>
-                    <form>
+                    <form method="post" action="<?php echo base_url('Register/register_user'); ?>">
                         <div class="input-container">
-                            <input type="text" required="required" />
+                            <input type="text" name="USERNAME" required="required" />
                             <label for="Username">Username</label>
                             <div class="bar"></div>
                         </div>
                         <div class="input-container">
-                            <input type="password" required="required" />
+                            <input type="password" name="PASSWORD" required="required" />
                             <label for="Password">Password</label>
                             <div class="bar"></div>
                         </div>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="button-container">
                             <button>
-                                <span>Next</span>
+                                <span >Next</span>
                             </button>
                         </div>
                     </form>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="alert alert-success fade in">
-            Register is <strong>successfully</strong>, return to <a href="<?= base_url('login') ?>" class="alert-link">login</a> page.
+            Register is <strong>successfully</strong>, return to <a href="<?= base_url('Login') ?>" class="alert-link">login</a> page.
         </div>
     </div>
 </body>
