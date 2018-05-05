@@ -52,7 +52,7 @@
                     response.name
                 );
                 FB.api('/' + response.id + '/permissions', 'delete');
-                window.location.href = "<?= base_url('home') ?>";
+                window.location.href = "<?= base_url() ?>";
             });
         }
 
@@ -83,12 +83,12 @@
                 <h1 class="title">Login</h1>
                 <form action="<?= base_url('login') ?>" method="POST">
                     <div class="input-container">
-                        <input type="text" required="required" />
+                        <input type="text" name="USERNAME" required="required" />
                         <label for="Username">Username</label>
                         <div class="bar"></div>
                     </div>
                     <div class="input-container">
-                        <input type="password" required="required" />
+                        <input type="password" name="PASSWORD" required="required" />
                         <label for="Password">Password</label>
                         <div class="bar"></div>
                     </div>
