@@ -8,8 +8,8 @@ class Register extends CI_Controller {
 	}
 
 	public function index() {
-		if($this->input->post('register') === 'Register') {
-
+		if($this->input->method() === 'post') {
+			
 		} else {
 			$this->load->view('Register_View');
 		}

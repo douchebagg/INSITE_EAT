@@ -1,0 +1,54 @@
+body {
+  background-image: url("https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/backgroup-2-restaurant.jpg");
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  color: #666666;
+  font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll To Bottom */
+#top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #ec2652;
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  -webkit-transition: 0.3s ease;
+  transition: 0.5s ease;
+  color: #ffffff;
+  text-align: center;
+}
+#top i {
+  line-height: 52px;
+}
+#top:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* CodePen */
+#top {
+  bottom: 96px;
+  right: 36px;
+  background: #ec2652;
+  width: 52px;
+  height: 52px;
+  -webkit-animation: buttonFadeInUp 1s ease;
+  animation: buttonFadeInUp 1s ease;
+}
+
+.polaroid {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+.content {
+  text-align: center;
+  padding: 10px 20px;
+}

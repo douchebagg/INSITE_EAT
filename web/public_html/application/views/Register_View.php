@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Register</title>
+    <link rel="icon" href="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/dinner.png">
     <link rel="stylesheet" href="<?= base_url('js/login.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -14,17 +15,17 @@
                     <h1 class="title">Register</h1>
                     <form>
                         <div class="input-container">
-                            <input type="text" id="Username" required="required" />
+                            <input type="text" required="required" />
                             <label for="Username">Username</label>
                             <div class="bar"></div>
                         </div>
                         <div class="input-container">
-                            <input type="password" id="Password" required="required" />
+                            <input type="password" required="required" />
                             <label for="Password">Password</label>
                             <div class="bar"></div>
                         </div>
                         <div class="input-container">
-                            <input type="password" id="Repeat Password" required="required" />
+                            <input type="password" required="required" />
                             <label for="Repeat Password">Repeat Password</label>
                             <div class="bar"></div>
                         </div>
@@ -39,6 +40,9 @@
                     <div class="login"></div>
                 </a>
             </div>
+        </div>
+        <div class="alert alert-success fade in">
+            Register is <strong>successfully</strong>, return to <a href="<?= base_url('login') ?>" class="alert-link">login</a> page.
         </div>
     </div>
 </body>
