@@ -57,6 +57,7 @@ body {
   position: relative;
   z-index: 1;
   border-left: 5px solid #ec2652;
+  margin-top: 8px;
   margin-bottom: 5px;
   color:#ec2652;
   font-size: 20px;
@@ -68,27 +69,22 @@ body {
   color: #222;
   text-align: center;
   text-decoration: none;
-  padding-top: 5px;
+  padding-top: 2px;
   padding-right: 4px;
   padding-left: 4px;
   outline: 0;
   cursor: pointer;
   position: relative;
-  display: inline-block;
-  background: 0;
-  height: 30px;
-  border: 2px solid #e3e3e3;
+  display: inline-table;
   font-size: 16px;
-  font-weight: 600;
-  line-height: 1;
   overflow: hidden;
   -webkit-transition: .3s ease;
   transition: .3s ease;
 }
-.button-container a span {
-  position: relative;
+
+.button-container a {
   z-index: 1;
-  color: #ddd;
+  color: #555;
   -webkit-transition: .3s ease;
   transition: .3s ease;
 }
@@ -112,32 +108,27 @@ body {
   color: #ec2652;
   border-color: #ec2652;
 }
-.button-container a:hover span, .button-container a:active span, .button-container a:focus span {
+.button-container a:hover, .button-container a:active, .button-container a:focus {
   color: #ec2652;
-}
-.button-container a:active span, .button-container a:focus span {
-  color: #ffffff;
-}
-.button-container a:active:before, .button-container a:focus:before {
-  opacity: 1;
-  -webkit-transform: scale(10);
-  transform: scale(10);
 }
 
 input[type=text] {
-    width: 130px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('https://cdn.pixabay.com/photo/2015/12/08/17/38/magnifying-glass-1083373_960_720.png');
-    background-position: 10px 10px; 
-    background-repeat: no-repeat;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+  margin-right: 5px;
+  width: 30px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-size: 15px;
+  background-image: url('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/search.png');
+  background-position: right 6px bottom 50%; 
+  background-repeat: no-repeat;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
 }
 
 input[type=text]:focus {
-    width: 500px;
+  padding-left: 10px;
+  padding-right: 25px;
+  width: 300px;
 }

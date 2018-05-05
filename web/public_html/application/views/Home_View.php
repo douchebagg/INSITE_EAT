@@ -29,13 +29,13 @@
     <div class="container" style="padding-bottom: 100px;">
         <div class="row" style="padding-bottom: 25px;">
             <div class="col-md-12">
-                <div class="row" style="background: #fafafa; border-radius: 3px;box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 42px; padding-top: 5px; font-size: 18px">
-                    <div class="col-md-3 title-card">
+                <div class="row" style="background: #fafafa; border-radius: 3px;box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 48px; font-size: 18px">
+                    <div class="col-md-4 title-card">
                         <?= $this->session->userdata('user_data')['name'] ?>
                     </div>
-                    <div class="col-md-9 text-right button-container">
-                        <input type="text">
-                        <a href="<?= base_url('review') ?>">
+                    <div class="col-md-8 text-right button-container">
+                        <input type="text" ng-model="search" ng-blur="search = ''">
+                        <a href="<?= base_url('review') ?>" style="margin-top: 10px">
                             My Review
                         </a>
                         <a href="<?= base_url('profile') ?>">
