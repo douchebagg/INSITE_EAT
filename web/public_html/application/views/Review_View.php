@@ -62,7 +62,7 @@
         <div class="row" ng-if="food !== 'No data in Restaurant api.'">
             <div class="col-md-3" ng-repeat="x in food | filter: search">
                 <div class="polaroid">
-                        <a href="<?= base_url('restaurant') ?>?id={{x.RES_ID}}" style="text-decoration: none">
+                        <a href="<?= base_url('food') ?>?id={{x.FOOD_ID}}" style="text-decoration: none">
                             <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:100%" ng-hide="x.FOOD_IMAGES === NULL">
                             <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.FOOD_IMAGES !== NULL">
                             <div class="content">
