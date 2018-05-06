@@ -16,19 +16,17 @@
                 token: token,
                 name: name
             });
-            console.log(token);
-            console.log(name);
         }
 
         // google signin
         function googleSignIn(googleUser) {
             let profile = googleUser.getBasicProfile();
             signin(
-                googleUser.getAuthResponse().id_token,
+                profile.getId(),
                 profile.getName()
             );
             googleSignOut();
-            window.location.href = "<?= base_url() ?>";
+            window.location.href = "<?= base_url('home') ?>";
             // console.log("ID: " + profile.getId());
             // console.log('Full Name: ' + profile.getName());
             // console.log('Given Name: ' + profile.getGivenName());
@@ -52,7 +50,7 @@
                     response.name
                 );
                 FB.api('/' + response.id + '/permissions', 'delete');
-                window.location.href = "<?= base_url() ?>";
+                window.location.href = "<?= base_url('home') ?>";
             });
         }
 

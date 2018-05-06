@@ -11,9 +11,22 @@ class Login extends CI_Controller {
 	public function index() {
 		if($this->input->method() === 'post') {
 			if($this->input->post('token') !== NULL) {
+				$token = md5($this->input->post('token'));
+				$name = $this->input->post('name');
+
+				$result = $this->Login_Model->get_user_by_token($token);
+
+				if(empty($result)) {
+					$this->Login_Model->add_user_by_token($token, $name);
+				} else {
+					if($result[0]['DISPLAY_NAME'] !== $name) {
+						$this->Login_Model->update_user_by_token($token, $name);
+					}
+				}
 				$session = array(
-					'token' => $this->input->post('token'),
-					'name' => $this->input->post('name')
+					'token' => $token,
+					'name' => $name,
+					'other' => true
 				);
 				$this->session->set_userdata('user_data', $session);
 			} else {
@@ -39,8 +52,10 @@ class Login extends CI_Controller {
 		if($usr_result) {
 			foreach($usr_result as $row) {
 				$sessArray = array(
-				'token' => $row['ID'],
-				'name' => $row['DISPLAY_NAME'],
+					'token' => $row['ID'],
+					'username' => $row['USERNAME'],
+					'name' => $row['DISPLAY_NAME'],
+					'other' => false
 				);
 				$this->session->set_userdata('user_data', $sessArray);
 			}

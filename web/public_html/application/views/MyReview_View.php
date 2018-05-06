@@ -19,12 +19,19 @@
         let app = angular.module('myapp', []);
         app.controller('myctrl', ($scope, $http) => {
             $scope.refresh = () => {
-                $http.get('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/~api/restaurant')
+                $http.get('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/~api/account/<?= $session['token'] ?>')
                     .then((response) => {
                         $scope.restaurant = response.data.restaurant;
                     });
             }
             $scope.refresh();
+
+            $scope.drop_retuarant = (RES_ID) => {
+                $http.delete('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/~api/restaurant/' + RES_ID)
+                    .then((response) => {
+                        $scope.refresh();
+                    });
+            }
         });
     </script>
 </head>
@@ -32,22 +39,24 @@
     <div class="container" style="padding-bottom: 100px;">
         <div class="row" style="padding-bottom: 25px;">
             <div class="col-md-12">
-                <div class="row" style="background: #fafafa; border-radius: 3px;box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 48px; font-size: 18px">
+                <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 48px; font-size: 18px">
                     <div class="col-md-4 title-card">
                         <?= $session['name'] ?>
                     </div>
                     <div class="col-md-8 text-right button-container">
                         <input type="text" ng-model="search" ng-blur="search = ''">
+                        <a href="<?= base_url('home') ?>" style="margin-top: 10px">
+                            Home
+                        </a>
+                    </div>
+                </div>
+                <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 48px; font-size: 18px">
+                    <div class="col-md-4 title-card-2">
+                        My Review
+                    </div>
+                    <div class="col-md-8 text-right button-container">
                         <a href="<?= base_url('review') ?>" style="margin-top: 10px">
-                            My Review
-                        </a>
-                        <?php if(!$session['other']) { ?>
-                        <a href="<?= base_url('profile') ?>">
-                            Profile
-                        </a>
-                        <?php } ?>
-                        <a href="<?= base_url('logout') ?>">
-                            Logout
+                            ADD
                         </a>
                     </div>
                 </div>
@@ -56,7 +65,10 @@
         <div class="row" ng-if="restaurant !== 'No data in Restaurant api.'">
             <div class="col-md-3" ng-repeat="x in restaurant | filter: search">
                 <div class="polaroid">
-                    <a href="<?= base_url('restaurant') ?>?id={{x.RES_ID}}" style="text-decoration: none">
+                    <span class="delete" ng-click="drop_retuarant(x.RES_ID)">
+                        <i class="fa fa-close"></i>
+                    </span>
+                    <a href="<?= base_url('Restaurant') ?>?id={{x.RES_ID}}" style="text-decoration: none">
                         <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.RES_IMAGE}}" style="width:100%" ng-hide="x.RES_IMAGES === NULL">
                         <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.RES_IMAGES !== NULL">
                         <div class="content">

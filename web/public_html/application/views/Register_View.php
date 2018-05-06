@@ -13,7 +13,7 @@
                 <div class="card"></div>
                 <div class="card">
                     <h1 class="title">Register</h1>
-                    <form method="post" action="<?php echo base_url('Register/register_user'); ?>">
+                    <form method="post" action="<?php echo base_url('register'); ?>">
                         <div class="input-container">
                             <input type="text" name="USERNAME" required="required" />
                             <label for="Username">Username</label>
@@ -41,9 +41,11 @@
                 </a>
             </div>
         </div>
+        <?php if(isset($status) && $status === 1) { ?>
         <div class="alert alert-success fade in">
             Register is <strong>successfully</strong>, return to <a href="<?= base_url('Login') ?>" class="alert-link">login</a> page.
         </div>
+        <?php } ?>
     </div>
 </body>
 </html>

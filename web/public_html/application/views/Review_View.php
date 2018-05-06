@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
         $(document).on('click', '#top', () => {
-            $('html, body').animate({scrollTop:0}, 500);
+            $('html, body').animate({scrollTop:0}, 250);
             return false;
         });
         let app = angular.module('myapp', []);
@@ -44,17 +44,37 @@
                     </div>
                     <div class="col-md-8 text-right button-container">
                         <input type="text" ng-model="search" ng-blur="search = ''">
-                        <a href="<?= base_url('review') ?>" style="margin-top: 10px">
-                            My Review
+                        <a href="<?= base_url('home') ?>" style="margin-top: 10px">
+                            Home
                         </a>
-                        <?php if(strlen($session['token']) < 10) { ?>
-                        <a href="<?= base_url('profile') ?>">
-                            Profile
-                        </a>
-                        <?php } ?>
-                        <a href="<?= base_url('logout') ?>">
-                            Logout
-                        </a>
+                    </div>
+                </div>
+                <div ng-repeat="x in restaurant" style="margin-top: 10px">
+                    <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 48px; font-size: 18px">
+                        <div class="col-md-12 title-card-2 text-center">
+                            {{x.RES_NAME}}
+                        </div>
+                    </div>
+                    <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); font-size: 18px; padding: 10px 0px">
+                        <div class="col-md-4 title-card-2 text-right">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:100%" ng-hide="x.FOOD_IMAGES === NULL">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.FOOD_IMAGES !== NULL">
+                        </div>
+                        <div class="col-md-8" style="border-left: #ec2652 2px solid;">
+                            <div class="row">
+                                <div class="col-md-12" style="padding-top: 5px; word-wrap: break-word">{{x.RES_REVIEW}}</div>
+                                <div class="col-md-12" ng-hide="x.OPENNING_TIME === NULL" style="padding-top: 10px;">Opening Time : {{x.OPENNING_TIME}}</div>
+                                <div class="col-md-12" ng-hide="x.CLOSING_TIME === NULL" style="padding-top: 10px;">Closing Time : {{x.CLOSING_TIME}}</div>
+                                <div class="col-md-12" style="padding-top: 10px;">Phone Number : {{x.RES_PHONE}}</div>
+                                <div class="col-md-12" style="padding-top: 10px;">{{x.RES_SCORE}} <span class="fa fa-star" style="color: #ec2652;"></span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="font-size: 14px; color: #444;">
+                            <div class="col-md-12 text-right">Post by : {{x.POST_BY}}</div>
+                        </div>
+                    </div>
+                    <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); font-size: 18px; padding: 10px 0px; height: 300px">
+                        อยากได้ map ไว้ตรงนี้โว้ยยยยยยยย
                     </div>
                 </div>
             </div>
