@@ -66,11 +66,11 @@
                             <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:100%" ng-hide="x.FOOD_IMAGES === NULL">
                             <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.FOOD_IMAGES !== NULL">
                             <div class="content">
-                                <div>Foood Name: {{x.FOOD_NAME}}</div>
-                                <div>Food Price: {{x.FOOD_PRICE}}</div>
-                                <div>Food Review: {{x.FOOD_REVIEW}}</div>
+                                <div>{{x.FOOD_NAME}}</div>
+                                <div>{{x.FOOD_PRICE}} ฿</div>
+                                <div>{{x.FOOD_REVIEW}}</div>
                                 <div>
-                                    <span>Food Score: {{x.FOOD_SCORE}}</span>
+                                    <span>{{x.FOOD_SCORE}}</span>
                                     <span class="fa fa-star" style="color: #ec2652;"></span>
                                 </div>
                                 <div>Post by: {{x.POST_BY}}</div>
