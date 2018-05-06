@@ -61,6 +61,7 @@ class Food extends REST_Controller {
             'FOOD_PRICE' => $request->FOOD_PRICE,
             'FOOD_SCORE' => $request->FOOD_SCORE,
             'RES_ID' => $res_id,
+            'POST_BY' => $request->POST_BY,
             'UPDATE_TIME' => date("Y-m-d H:i:s")
         );
 
@@ -87,6 +88,7 @@ class Food extends REST_Controller {
             'FOOD_SCORE' => $request->FOOD_SCORE,
             'UPDATE_TIME' => date("Y-m-d H:i:s"),
             'RES_ID' => $res_id,
+            'POST_BY' => $request->POST_BY,
             'FOOD_ID' => $food_id
         );
 

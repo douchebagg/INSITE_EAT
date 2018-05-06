@@ -1,10 +1,11 @@
 <?php
     $session = $this->session->userdata('user_data');
+    $id = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html ng-app="myapp">
 <head>
-    <title>Home</title>
+    <title>Review</title>
     <link rel="icon" href="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/dinner.png">
     <link rel="stylesheet" type="text/css" href="<?= base_url('js/home.css') ?>">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -19,9 +20,14 @@
         let app = angular.module('myapp', []);
         app.controller('myctrl', ($scope, $http) => {
             $scope.refresh = () => {
-                $http.get('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/~api/restaurant')
+                $http.get('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/~api/restaurant/<?php echo $id;?>')
                     .then((response) => {
                         $scope.restaurant = response.data.restaurant;
+                    });
+
+                $http.get('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/~api/restaurant/<?php echo $id;?>/food')
+                    .then((response) => {
+                        $scope.food = response.data.food;
                     });
             }
             $scope.refresh();
@@ -53,26 +59,24 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-if="restaurant !== 'No data in Restaurant api.'">
-            <div class="col-md-3" ng-repeat="x in restaurant | filter: search">
+        <div class="row" ng-if="food !== 'No data in Restaurant api.'">
+            <div class="col-md-3" ng-repeat="x in food | filter: search">
                 <div class="polaroid">
-                    <a href="<?= base_url('restaurant') ?>?id={{x.RES_ID}}" style="text-decoration: none">
-                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.RES_IMAGE}}" style="width:100%" ng-hide="x.RES_IMAGES === NULL">
-                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.RES_IMAGES !== NULL">
-                        <div class="content">
-                            <div>{{x.RES_NAME}}</div>
-                            <hr>
-                            <div>
-                                <span>{{x.RES_SCORE}}</span>
-                                <span class="fa fa-star" style="color: #ec2652;"></span>
+                        <a href="<?= base_url('restaurant') ?>?id={{x.RES_ID}}" style="text-decoration: none">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:100%" ng-hide="x.FOOD_IMAGES === NULL">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.FOOD_IMAGES !== NULL">
+                            <div class="content">
+                                <div>Foood Name: {{x.FOOD_NAME}}</div>
+                                <div>Food Price: {{x.FOOD_PRICE}}</div>
+                                <div>Food Review: {{x.FOOD_REVIEW}}</div>
+                                <div>Food Score: {{x.FOOD_SCORE}}</div>
+                                <div>Post by: {{x.POST_BY}}</div>
                             </div>
-                            <div>post by: {{x.POST_BY}}</div>
-                        </div>
-                    </a>
+                        </a>
                 </div>
             </div>
         </div>
-        <div class="row" ng-if="restaurant === 'No data in Restaurant api.'">
+        <div class="row" ng-if="food === 'No data in Restaurant api.'">
             <div class="col-md-12">
                 <div class="polaroid">
                     <div class="content">
