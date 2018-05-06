@@ -69,7 +69,10 @@
                                 <div>Foood Name: {{x.FOOD_NAME}}</div>
                                 <div>Food Price: {{x.FOOD_PRICE}}</div>
                                 <div>Food Review: {{x.FOOD_REVIEW}}</div>
-                                <div>Food Score: {{x.FOOD_SCORE}}</div>
+                                <div>
+                                    <span>Food Score: {{x.FOOD_SCORE}}</span>
+                                    <span class="fa fa-star" style="color: #ec2652;"></span>
+                                </div>
                                 <div>Post by: {{x.POST_BY}}</div>
                             </div>
                         </a>
