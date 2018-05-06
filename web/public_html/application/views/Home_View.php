@@ -1,3 +1,6 @@
+<?php
+    $session = $this->session->userdata('user_data');
+?>
 <!DOCTYPE html>
 <html ng-app="myapp">
 <head>
@@ -31,16 +34,18 @@
             <div class="col-md-12">
                 <div class="row" style="background: #fafafa; border-radius: 3px;box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 48px; font-size: 18px">
                     <div class="col-md-4 title-card">
-                        <?= $this->session->userdata('user_data')['name'] ?>
+                        <?= $session['name'] ?>
                     </div>
                     <div class="col-md-8 text-right button-container">
                         <input type="text" ng-model="search" ng-blur="search = ''">
                         <a href="<?= base_url('review') ?>" style="margin-top: 10px">
                             My Review
                         </a>
+                        <?php if(strlen($session['token']) < 10) { ?>
                         <a href="<?= base_url('profile') ?>">
                             Profile
                         </a>
+                        <?php } ?>
                         <a href="<?= base_url('logout') ?>">
                             Logout
                         </a>
