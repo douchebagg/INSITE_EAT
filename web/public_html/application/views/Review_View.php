@@ -31,8 +31,28 @@
                     });
             }
             $scope.refresh();
+
+            function initMap() {
+                var latlng = new google.maps.LatLng(13.2724, 100.9234);
+                  map = new google.maps.Map(document.getElementById('map_canvas'), {
+                    center: latlng,
+                    zoom: 18
+                });
+
+                var marker = new google.maps.Marker({
+                  position: latlng,
+                  map: map,
+                  title: 'Click to zoom'
+                });
+
+                marker.addListener('click', function() {
+                  map.setZoom(18);
+                  map.setCenter(marker.getPosition());
+                });
+              }
         });
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnckJfCM0a0gmuUUpvzrmUHZgqavIZIkk&libraries=places&callback=initMap" async defer></script>
 </head>
 <body ng-controller="myctrl">
     <div class="container" style="padding-bottom: 100px;">
@@ -73,9 +93,9 @@
                             <div class="col-md-12 text-right">Post by : {{x.POST_BY}}</div>
                         </div>
                     </div>
-                    <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); font-size: 18px; padding: 10px 0px; height: 300px">
-                        อยากได้ map ไว้ตรงนี้โว้ยยยยยยยย
-                    </div>
+                </div>
+                <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); font-size: 18px; height: 300px">
+                  <div id="map_canvas" style="width: 100%; height: 100%"></div>
                 </div>
             </div>
         </div>
