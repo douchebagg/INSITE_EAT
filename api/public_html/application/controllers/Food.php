@@ -60,9 +60,9 @@ class Food extends REST_Controller {
             'FOOD_REVIEW' => $request->FOOD_REVIEW,
             'FOOD_PRICE' => $request->FOOD_PRICE,
             'FOOD_SCORE' => $request->FOOD_SCORE,
+            'FOOD_IMAGE' => $request->FOOD_IMAGE,
             'RES_ID' => $res_id,
-            'POST_BY' => $request->POST_BY,
-            'UPDATE_TIME' => date("Y-m-d H:i:s")
+            'POST_BY' => $request->POST_BY
         );
 
         $result = $this->Food_Model->add_food($data);
@@ -86,9 +86,9 @@ class Food extends REST_Controller {
             'FOOD_REVIEW' => $request->FOOD_REVIEW,
             'FOOD_PRICE' => $request->FOOD_PRICE,
             'FOOD_SCORE' => $request->FOOD_SCORE,
-            'UPDATE_TIME' => date("Y-m-d H:i:s"),
-            'RES_ID' => $res_id,
             'POST_BY' => $request->POST_BY,
+            'FOOD_IMAGE' => $request->FOOD_IMAGE,
+            'RES_ID' => $res_id,
             'FOOD_ID' => $food_id
         );
 

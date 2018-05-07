@@ -45,8 +45,8 @@ class Restaurant extends REST_Controller {
     		'CLOSING_TIME' => $request->CLOSING_TIME,
     		'RES_PHONE' => $request->RES_PHONE,
     		'RES_SCORE' => $request->RES_SCORE,
-            'POST_BY' => $request->POST_BY,
-            'UPDATE_TIME' => date("Y-m-d H:i:s")
+            'RES_IMAGE' => $request->RES_IMAGE,
+            'POST_BY' => $request->POST_BY
     	);
 
 		$result = $this->Restaurant_Model->add_restaurant($data);
@@ -70,7 +70,7 @@ class Restaurant extends REST_Controller {
             'RES_PHONE' => $request->RES_PHONE,
             'RES_SCORE' => $request->RES_SCORE,
             'POST_BY' => $request->POST_BY,
-            'UPDATE_TIME' => date("Y-m-d H:i:s"),
+            'RES_IMAGE' => $request->RES_IMAGE,
             'RES_ID' => $id
         );
 

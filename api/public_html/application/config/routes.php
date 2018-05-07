@@ -77,3 +77,9 @@ $route['restaurant/([A-Z0-9]+)/food/count']['get'] = 'food/count/$1';
 $route['restaurant/([A-Z0-9]+)/food']['post'] = 'food/index/$1';
 $route['restaurant/([A-Z0-9]+)/food/([A-Z0-9]+)']['put'] = 'food/index/$1/$2';
 $route['restaurant/([A-Z0-9]+)/food/([A-Z0-9]+)']['delete'] = 'food/index/$1/$2';
+/*
+| -------------------------------------------------------------------------
+| Food Routes
+| -------------------------------------------------------------------------
+*/
+$route['account/([A-Z0-9]+)']['get'] = 'account/index/$1';

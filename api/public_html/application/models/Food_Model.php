@@ -28,7 +28,7 @@ class Food_Model extends CI_Model {
 	}
 
 	public function update_food($data) {
-		$sql = 'UPDATE Food SET FOOD_NAME=?, FOOD_REVIEW=?, FOOD_PRICE=?, FOOD_SCORE=?, POST_BY=?, UPDATE_TIME=? WHERE RES_ID=? AND FOOD_ID=?';
+		$sql = 'UPDATE Food SET FOOD_NAME=?, FOOD_REVIEW=?, FOOD_PRICE=?, FOOD_SCORE=?, FOOD_IMAGE=?, POST_BY=? WHERE RES_ID=? AND FOOD_ID=?';
 		$this->db->query($sql, $data);
 		return (bool)($this->db->affected_rows() > 0);
 	}
