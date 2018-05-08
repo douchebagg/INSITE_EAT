@@ -97,8 +97,8 @@
                             <div class="row">
                                 <div class="col-md-12" style="padding-top: 10px; word-wrap: break-word"><b>{{x.FOOD_NAME}}</b></div>
                                 <div class="col-md-12" style="padding-top: 10px; word-wrap: break-word">{{x.FOOD_REVIEW}}</div>
-                                <div class="col-md-12" style="padding-top: 10px;">{{x.FOOD_PRICE}}</div>
                                 <div class="col-md-12" style="padding-top: 10px;">{{x.FOOD_SCORE}} <span class="fa fa-star" style="color: #ec2652;"></span></div>
+                                <div class="col-md-12" style="padding-top: 10px;">{{x.FOOD_PRICE}} ฿</div>
                             </div>
                         </div>
                         <div class="col-md-12" style="font-size: 14px; color: #444;">

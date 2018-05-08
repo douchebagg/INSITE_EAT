@@ -37,7 +37,7 @@
                         <?= $session['name'] ?>
                     </div>
                     <div class="col-md-8 text-right button-container">
-                        <input type="text" ng-model="search" ng-blur="search = ''">
+                        <input type="text" name="search" ng-model="search" ng-blur="search = ''">
                         <a href="<?= base_url('review') ?>" style="margin-top: 10px">
                             My Review
                         </a>

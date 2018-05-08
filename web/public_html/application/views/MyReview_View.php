@@ -96,7 +96,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 4px; width: 100%; margin-left: 0px; margin-bottom: 20px; opacity: 0.3"></div>
+        <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 4px; width: 100%; margin-left: 0px; margin-bottom: 20px; opacity: 0.3" ng-if="(restaurant !== 'No data in Restaurant api.') && (food !== 'No data in Food api.')"></div>
         <div class="row" ng-if="food !== 'No data in Food api.'">
             <div class="col-md-3" ng-repeat="x in food | filter: search">
                 <div class="polaroid">
