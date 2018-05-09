@@ -27,12 +27,17 @@ class Register extends CI_Controller {
             'PASSWORD'=>md5($this->input->post('PASSWORD')),
             'DISPLAY_NAME'=>$this->input->post('USERNAME')
         );
+        $check=md5($this->input->post('CHECK'));
 
         $username_check=$this->Register_Model->username_check($user['USERNAME']);
 
         if($username_check){
-            $this->Register_Model->register_user($user);
-            $this->load->view('Register_View', array('status' => 1));
+            if ($check==$user['PASSWORD']) {
+                $this->Register_Model->register_user($user);
+                $this->load->view('Register_View', array('status' => 1));
+            }else{
+                $this->load->view('Register_View', array('status' => 0));
+            }
         }else{
             $this->load->view('Login_View', array('status' => 0));
         }
