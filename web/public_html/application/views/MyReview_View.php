@@ -74,6 +74,11 @@
                 </div>
             </div>
         </div>
+        <div class="row" style="background: #ec2652; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 38px; width: 100%; margin-left: 0px; margin-bottom: 15px; font-size: 20px; border-radius: 6px;">
+            <div class="col-md-12" style="margin-top: 4px; color: #fff">
+                Restaurant
+            </div>
+        </div>
         <div class="row" ng-if="restaurant !== 'No data in Restaurant api.'">
             <div class="col-md-3" ng-repeat="x in restaurant | filter: search">
                 <div class="polaroid">
@@ -81,14 +86,16 @@
                         <i class="fa fa-close"></i>
                     </span>
                     <a href="<?= base_url('review/edit') ?>?type=restaurant&res_id={{x.RES_ID}}" style="text-decoration: none">
-                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.RES_IMAGE}}" style="width:100%" ng-hide="x.RES_IMAGES == NULL">
-                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.RES_IMAGES != NULL">
+                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.RES_IMAGE}}" style="width:100%; height: 170px" ng-hide="x.RES_IMAGE == NULL">
+                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:255px" ng-hide="x.RES_IMAGE != NULL">
                         <div class="content">
                             <div>{{x.RES_NAME}}</div>
                             <hr>
                             <div>
-                                <span>{{x.RES_SCORE}}</span>
-                                <span class="fa fa-star" style="color: #ec2652;"></span>
+                                <span ng-repeat="n in [1,2,3,4,5]">
+                                    <span class="fa fa-star" style="color: #ec2652;" ng-if="x.RES_SCORE >= n"></span>
+                                    <span class="fa fa-star-o" ng-if="x.RES_SCORE < n"></span>
+                                </span>
                             </div>
                             <div>post by: {{x.POST_BY}}</div>
                         </div>
@@ -96,7 +103,21 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 4px; width: 100%; margin-left: 0px; margin-bottom: 20px; opacity: 0.3" ng-if="(restaurant !== 'No data in Restaurant api.') && (food !== 'No data in Food api.')"></div>
+        <div class="row" ng-if="restaurant === 'No data in Restaurant api.'">
+            <div class="col-md-12">
+                <div class="polaroid">
+                    <div class="content">
+                        <div class="title">No information in database.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="background: #ec2652; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); height: 38px; width: 100%; margin-left: 0px; margin-bottom: 15px; font-size: 20px; border-radius: 6px;">
+            <div class="col-md-12" style="margin-top: 4px; color: #fff">
+                Food
+            </div>
+        </div>
         <div class="row" ng-if="food !== 'No data in Food api.'">
             <div class="col-md-3" ng-repeat="x in food | filter: search">
                 <div class="polaroid">
@@ -104,14 +125,16 @@
                         <i class="fa fa-close"></i>
                     </span>
                     <a href="<?= base_url('review/edit') ?>?type=food&res_id={{x.RES_ID}}&food_id={{x.FOOD_ID}}" style="text-decoration: none">
-                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:100%" ng-hide="x.FOOD_IMAGE == NULL">
+                        <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:100%; height: 170px" ng-hide="x.FOOD_IMAGE == NULL">
                         <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.FOOD_IMAGE != NULL">
                         <div class="content">
                             <div>{{x.FOOD_NAME}}</div>
                             <hr>
                             <div>
-                                <span>{{x.FOOD_SCORE}}</span>
-                                <span class="fa fa-star" style="color: #ec2652;"></span>
+                                <span ng-repeat="n in [1,2,3,4,5]">
+                                    <span class="fa fa-star" style="color: #ec2652;" ng-if="x.FOOD_SCORE >= n"></span>
+                                    <span class="fa fa-star-o" ng-if="x.FOOD_SCORE < n"></span>
+                                </span>
                             </div>
                             <div>post by: {{x.POST_BY}}</div>
                         </div>
@@ -120,7 +143,7 @@
             </div>
         </div>
 
-        <div class="row" ng-if="(restaurant === 'No data in Restaurant api.') && (food === 'No data in Food api.')">
+        <div class="row" ng-if="food === 'No data in Food api.'">
             <div class="col-md-12">
                 <div class="polaroid">
                     <div class="content">

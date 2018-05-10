@@ -90,15 +90,20 @@
                 <div ng-repeat="x in food">
                     <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); font-size: 16px; padding: 10px 0px;">
                         <div class="col-md-4 title-card-2 text-right">
-                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:100%" ng-hide="x.FOOD_IMAGES === NULL">
-                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.FOOD_IMAGES !== NULL">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:255px; height: 170px" ng-hide="x.FOOD_IMAGE == NULL">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.FOOD_IMAGE != NULL">
                         </div>
                         <div class="col-md-8" style="border-left: #ec2652 2px solid;">
                             <div class="row">
                                 <div class="col-md-12" style="padding-top: 10px; word-wrap: break-word"><b>{{x.FOOD_NAME}}</b></div>
                                 <div class="col-md-12" style="padding-top: 10px; word-wrap: break-word">{{x.FOOD_REVIEW}}</div>
-                                <div class="col-md-12" style="padding-top: 10px;">{{x.FOOD_SCORE}} <span class="fa fa-star" style="color: #ec2652;"></span></div>
-                                <div class="col-md-12" style="padding-top: 10px;">{{x.FOOD_PRICE}} ฿</div>
+                                <div class="col-md-12" style="padding-top: 10px;">Price : {{x.FOOD_PRICE}} ฿</div>
+                                <div class="col-md-12" style="padding-top: 10px;">
+                                    <span ng-repeat="n in [1,2,3,4,5]">
+                                        <span class="fa fa-star" style="color: #ec2652;" ng-if="x.FOOD_SCORE >= n"></span>
+                                        <span class="fa fa-star-o" ng-if="x.FOOD_SCORE < n"></span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12" style="font-size: 14px; color: #444;">
