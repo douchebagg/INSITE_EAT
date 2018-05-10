@@ -39,29 +39,42 @@
 
             $scope.add_res = () => {
                 $scope.res.POST_BY = "<?= $this->session->userdata('user_data')['token'] ?>";
-                $scope.res.OPENNING_TIME = document.getElementById('openning').value;
-                $scope.res.CLOSING_TIME = document.getElementById('closing').value;
-                $scope.res.RES_IMAGE = image_value();
+
+                if(document.getElementById('openning').value != '') {
+                    $scope.res.OPENNING_TIME = document.getElementById('openning').value;
+                } else {
+                    $scope.res.OPENNING_TIME = null;
+                }
+
+                if(document.getElementById('closing').value != '') {
+                    $scope.res.CLOSING_TIME = document.getElementById('closing').value;
+                } else {
+                    $scope.res.CLOSING_TIME = null;
+                }
+                
+                $scope.res.RES_LATITUDE = document.getElementById('latclicked').value;
+                $scope.res.RES_LONGITUDE = document.getElementById('longclicked').value;
+
+                if(document.getElementById('photo_res').value != null && document.getElementById('photo_res').value != '') {
+                    $scope.res.RES_IMAGE = document.getElementById('photo_res').value.substring(12);
+                } else {
+                    $scope.res.RES_IMAGE = null;
+                }
+                
                 $http.post('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/~api/restaurant', $scope.res);
             }
 
             $scope.add_food = () => {
                 $scope.fd.POST_BY = "<?= $this->session->userdata('user_data')['token'] ?>";
-                $scope.fd.RES_IMAGE = image_value();
+                if(document.getElementById('photo_food').value != null && document.getElementById('photo_food').value != '') {
+                    $scope.fd.FOOD_IMAGE = document.getElementById('photo_food').value.substring(12);
+                } else {
+                    $scope.fd.FOOD_IMAGE = null;
+                }
                 res_id = $scope.fd.RES_ID;
                 $http.post('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/~api/restaurant/' + res_id + '/food', $scope.fd);
             }
         });
-
-        function image_value() {
-            if(document.getElementById('photo_res').value) {
-                return document.getElementById('photo_res').value.substring(12);
-            } else if(document.getElementById('photo_food').value) {
-                return document.getElementById('photo_food').value.substring(12);
-            } else {
-                return null;
-            }
-        }
 
         function file_upload(type) {
             if(type == 0) {
@@ -98,13 +111,13 @@
         });
 
         google.maps.event.addListener(map,'click',function(event) {                
-                document.getElementById('latclicked').innerHTML = event.latLng.lat();
-                document.getElementById('longclicked').innerHTML =  event.latLng.lng();
+                document.getElementById('latclicked').value = event.latLng.lat();
+                document.getElementById('longclicked').value =  event.latLng.lng();
         });
 
         marker.addListener('click', function(event) {              
-              document.getElementById('latclicked').innerHTML = event.latLng.lat();
-              document.getElementById('longclicked').innerHTML =  event.latLng.lng();
+              document.getElementById('latclicked').value = event.latLng.lat();
+              document.getElementById('longclicked').value =  event.latLng.lng();
         });
       }
 
@@ -185,7 +198,7 @@
                     <div class="form-group" ng-show="type === 'Restaurant'">
                         <form action="<?= base_url('review/add') ?>" method="post" ng-submit="add_res()" enctype="multipart/form-data">
                             <div class="row col-md-12" style="margin-left: 0px">
-                                <div class="form-group col-md-12" ng-init="res.RES_NAME = null">
+                                <div class="form-group col-md-12" ng-init="res.RES_NAME = null" ng-click="function_ngay_ngay()">
                                     <label style="font-size: 14px">Restaurant Name</label>
                                     <input type="text" class="form-control" ng-model="res.RES_NAME" placeholder="Restaurant Name" required>
                                 </div>
@@ -216,10 +229,10 @@
                                         <option value="5">5</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-12" ng-init="res.RES_LATITUDE = 13.2724; res.RES_LONGITUDE = 100.9234">
+                                <div class="form-group col-md-12">
                                     <div id="map_canvas" class="col-md-12" style="margin-top: 10px; width: 100%; height: 250px"></div>
-                                    <div id="latclicked"></div>
-                                    <div id="longclicked"></div>
+                                    <input type="hidden" id="latclicked" value="13.2860">
+                                    <input type="hidden" id="longclicked" value="100.9254">
                                 </div>
                                 <div class="form-group col-md-12" style="margin-top: 10px;" ng-init="res.RES_IMAGE = null">
                                     <div id="filechoose" class="btn btn-default" onclick='file_upload(0)'>Choose File</div>
@@ -268,7 +281,7 @@
                                 <div class="form-group col-md-12" style="margin-top: 10px;">
                                     <div id="filechoose" class="btn btn-default" onclick='file_upload(1)'>Choose File</div>
                                     <small id="filedisplay_2" class="text-muted">Choose images for food.</small>
-                                    <input type="file" id="photo_food" name="photo" accept=".png, .jpg, .jpeg" style="display: none;">
+                                    <input type="file" id="photo_food" name="photo" onchange="display_upload(1)" accept=".png, .jpg, .jpeg" style="display: none;">
                                 </div>
                             </div>
                             <div class="row col-md-12 text-right">
