@@ -25,6 +25,20 @@
                         let latitude = $scope.restaurant[0].RES_LATITUDE;
                         var longitude = $scope.restaurant[0].RES_LONGITUDE;
                         initMap(latitude, longitude);
+
+                        if($scope.restaurant[0].OPENNING_TIME != null) {
+                            let openning_time = $scope.restaurant[0].OPENNING_TIME.split(":");
+                            $scope.restaurant[0].OPENNING_TIME = openning_time[0] + ":" + openning_time[1];
+                        } else {
+                            $scope.restaurant[0].OPENNING_TIME = null;
+                        }
+
+                        if($scope.restaurant[0].CLOSING_TIME != null) {
+                            let closing_time = $scope.restaurant[0].CLOSING_TIME.split(":");
+                            $scope.restaurant[0].CLOSING_TIME = closing_time[0] + ":" + closing_time[1];
+                        } else {
+                            $scope.restaurant[0].CLOSING_TIME = null;
+                        }
                     });
 
                 $http.get('https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/~api/restaurant/<?php echo $id;?>/food')
@@ -82,8 +96,8 @@
                     </div>
                     <div class="row" style="background: #fafafa; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); font-size: 16px; padding: 10px 0px">
                         <div class="col-md-4 title-card-2 text-right">
-                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.RES_IMAGE}}" style="width:100%" ng-hide="x.RES_IMAGES == null">
-                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.RES_IMAGES != null">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.RES_IMAGE}}" style="width:100%; height: 170px" ng-hide="x.RES_IMAGE == null">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.RES_IMAGE != null">
                         </div>
                         <div class="col-md-8" style="border-left: #ec2652 2px solid;">
                             <div class="row">
@@ -91,7 +105,12 @@
                                 <div class="col-md-12" ng-hide="x.OPENNING_TIME == null" style="padding-top: 10px;">Opening Time : {{x.OPENNING_TIME}}</div>
                                 <div class="col-md-12" ng-hide="x.CLOSING_TIME == null" style="padding-top: 10px;">Closing Time : {{x.CLOSING_TIME}}</div>
                                 <div class="col-md-12" ng-hide="x.RES_PHONE == null" style="padding-top: 10px;">Phone Number : {{x.RES_PHONE}}</div>
-                                <div class="col-md-12" style="padding-top: 10px;">{{x.RES_SCORE}} <span class="fa fa-star" style="color: #ec2652;"></span></div>
+                                <div class="col-md-12" style="padding-top: 10px;">
+                                    <span ng-repeat="n in [1,2,3,4,5]">
+                                        <span class="fa fa-star" style="color: #ec2652;" ng-if="x.RES_SCORE >= n"></span>
+                                        <span class="fa fa-star-o" ng-if="x.RES_SCORE < n"></span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12" style="font-size: 14px; color: #444;">
@@ -108,13 +127,15 @@
             <div class="col-md-3" ng-repeat="x in food | filter: search">
                 <div class="polaroid" ng-repeat="y in restaurant">
                         <a href="<?= base_url('food') ?>?id={{x.FOOD_ID}}&resid={{y.RES_ID}}" style="text-decoration: none">
-                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:100%" ng-hide="x.FOOD_IMAGES == null">
-                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.FOOD_IMAGES != null">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/{{x.FOOD_IMAGE}}" style="width:100%; height: 170px" ng-hide="x.FOOD_IMAGE == null">
+                            <img src="https://ec2-13-250-12-231.ap-southeast-1.compute.amazonaws.com/images/thumbnail-default.jpg" style="width:100%" ng-hide="x.FOOD_IMAGE != null">
                             <div class="content">
                                 <div>{{x.FOOD_NAME}}</div>
                                 <div>
-                                    <span>{{x.FOOD_SCORE}}</span>
-                                    <span class="fa fa-star" style="color: #ec2652;"></span>
+                                    <span ng-repeat="n in [1,2,3,4,5]">
+                                        <span class="fa fa-star" style="color: #ec2652;" ng-if="x.FOOD_SCORE >= n"></span>
+                                        <span class="fa fa-star-o" ng-if="x.FOOD_SCORE < n"></span>
+                                    </span>
                                 </div>
                                 <div>Post by: {{x.POST_BY}}</div>
                             </div>
